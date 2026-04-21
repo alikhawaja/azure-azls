@@ -8,6 +8,13 @@
                 "description": "Provide prefix for the management group structure."
             }
         },
+        "parentManagementGroupId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Optional parent management group ID for the top level ALZ management group. Leave empty to use tenant root management group."
+            }
+        },
         "landingZoneMgs": {
             "type": "array",
             "defaultValue": [
@@ -25,7 +32,8 @@
             "landingZone": "[concat(parameters('topLevelManagementGroupPrefix'), '-', 'landingzones')]",
             "decommissioned": "[concat(parameters('topLevelManagementGroupPrefix'), '-', 'decommissioned')]",
             "sandboxes": "[concat(parameters('topLevelManagementGroupPrefix'), '-', 'sandboxes')]"
-        }
+        },
+        "topLevelManagementGroupParentId": "[if(empty(parameters('parentManagementGroupId')), tenantResourceId('Microsoft.Management/managementGroups/', tenant().tenantId), tenantResourceId('Microsoft.Management/managementGroups/', parameters('parentManagementGroupId')))]"
     },
     "resources": [
         {
@@ -33,7 +41,14 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2023-04-01",
             "name": "[parameters('topLevelManagementGroupPrefix')]",
-            "properties": {}
+            "properties": {
+                "displayName": "[parameters('topLevelManagementGroupPrefix')]",
+                "details": {
+                    "parent": {
+                        "id": "[variables('topLevelManagementGroupParentId')]"
+                    }
+                }
+            }
         },
         {
             // Create management group for platform management groups

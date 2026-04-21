@@ -9,6 +9,13 @@
                 "description": "Provide a prefix (max 10 characters, unique at tenant-scope) for the Management Group hierarchy and other resources created as part of Enterprise-scale."
             }
         },
+        "parentManagementGroupId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Optional parent management group ID under which the ALZ root management group will be created. Leave empty to place ALZ root directly under the tenant root management group."
+            }
+        },
         "singlePlatformSubscriptionId": {
             "type": "string",
             "defaultValue": "",
@@ -2358,6 +2365,9 @@
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
                         "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                    },
+                    "parentManagementGroupId": {
+                        "value": "[parameters('parentManagementGroupId')]"
                     }
                 }
             }
@@ -2404,6 +2414,9 @@
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
                         "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                    },
+                    "parentManagementGroupId": {
+                        "value": "[parameters('parentManagementGroupId')]"
                     }
                 }
             }

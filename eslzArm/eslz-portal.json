@@ -144,6 +144,16 @@
                             }
                         },
                         {
+                            "name": "parentManagementGroupId",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Parent management group ID (optional)",
+                            "toolTip": "Optional existing management group ID under which the ALZ root management group will be created. Leave empty to deploy under the tenant root management group.",
+                            "defaultValue": "",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
                             "name": "platformSubscription",
                             "type": "Microsoft.Common.OptionsGroup",
                             "label": "Platform subscription options",
@@ -10844,6 +10854,7 @@
         "outputs": {
             "parameters": {
                 "enterpriseScaleCompanyPrefix": "[steps('core').enterpriseScaleCompanyPrefix]",
+                "parentManagementGroupId": "[steps('core').parentManagementGroupId]",
                 "singlePlatformSubscriptionId": "[steps('core').singleSubscription.selector]",
                 "denyClassicResources": "[steps('core').denyClassicResources]",
                 "denyVMUnmanagedDisk": "[steps('core').denyVMUnmanagedDisk]",
