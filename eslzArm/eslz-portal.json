@@ -112,8 +112,8 @@
                             "type": "Microsoft.Common.InfoBox",
                             "visible": true,
                             "options": {
-                                "text": "Azure Landing Zones ARM deployment requires access at the tenant root (/) scope. Visit this link to ensure you have the appropriate RBAC permission to complete the deployment",
-                                "uri": "https://docs.microsoft.com/azure/role-based-access-control/elevate-access-global-admin",
+                                "text": "Azure Landing Zones ARM deployment is validated at the management group selected for this deployment. Ensure you have permission to validate and deploy at that management group scope, and to create child management groups beneath it.",
+                                "uri": "https://docs.microsoft.com/azure/governance/management-groups/overview",
                                 "style": "Info"
                             }
                         },
@@ -122,7 +122,7 @@
                             "type": "Microsoft.Common.TextBlock",
                             "visible": true,
                             "options": {
-                                "text": "Azure Landing Zones will create the management group hierarchy under the Tenant Root Group with the prefix provided at this step.",
+                                "text": "Azure Landing Zones will create the management group hierarchy under the management group selected for this deployment scope, using the prefix provided at this step.",
                                 "link": {
                                     "label": "Learn more",
                                     "uri": "https://docs.microsoft.com/azure/cloud-adoption-framework/ready/enterprise-scale/management-group-and-subscription-organization"
@@ -162,6 +162,7 @@
                             "filter": true,
                             "filterPlaceholder": "Filter management groups...",
                             "multiLine": true,
+                            "visible": false,
                             "constraints": {
                                 "allowedValues": "[concat(createArray(parse('{\"label\":\"Tenant Root Group\",\"description\":\"Create the ALZ root directly under the tenant root management group\",\"value\":\"\"}')), map(steps('basics').getManagementGroups.value, (mg) => parse(concat('{\"label\":\"', coalesce(mg.properties.displayName, mg.name), '\",\"description\":\"', mg.id, '\",\"value\":\"', mg.name, '\"}'))))]",
                                 "required": true

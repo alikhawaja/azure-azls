@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/tenantDeploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "enterpriseScaleCompanyPrefix": {
@@ -13,7 +13,7 @@
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Optional parent management group ID under which the ALZ root management group will be created. Leave empty to place ALZ root directly under the tenant root management group."
+                "description": "Optional parent management group ID under which the ALZ root management group will be created. Leave empty to place the ALZ root directly under the management group selected for this deployment."
             }
         },
         "singlePlatformSubscriptionId": {
